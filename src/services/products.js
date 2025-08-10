@@ -8,12 +8,17 @@ export const getProducts = async () => {
 
 
 export const getProductById = async (productId) => {
-    const product = await ProductModel.findById(productId);
+    const product = await ProductModel.findOne({ _id: productId });
     return product;
 };
 
 export const createProduct = async (payload) => {
-const product = await ProductModel.create(payload);
-return product;
+    const product = await ProductModel.create(payload);
+    return product;
 
-}
+};
+
+export const patchProduct = async (productId, payload) => {
+    const product = await ProductModel.findOneAndUpdate({ _id: productId }, payload, { new: true });
+    return product;
+};
