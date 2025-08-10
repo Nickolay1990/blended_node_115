@@ -1,4 +1,4 @@
-import { Schema } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const productSchema = new Schema(
   {
@@ -25,3 +25,5 @@ const productSchema = new Schema(
     versionKey: false,
   },
 );
+
+export const ProductModel = model('Product', productSchema);
