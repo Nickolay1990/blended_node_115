@@ -1,4 +1,4 @@
-import createHttpError from "http-errors";
+import createHttpError, { HttpError } from "http-errors";
 import { getProductById, getProducts, createProduct, patchProduct } from "../services/products.js";
 
 export const getProductController = async (req, res) => {
@@ -39,7 +39,9 @@ export const createProductController = async (req, res) => {
 
 export const updateProductController = async (req, res) => {
     const product = await patchProduct(req.params.productId, req.body);
-
+    if (!product) {
+        throw createHttpError(404, "Product not found");
+    }
     res.status(200).json({
         status: 200,
         message: "Successfully patched a product!",
