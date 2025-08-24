@@ -6,9 +6,12 @@ import {
   patchProduct,
   deleteProduct,
 } from '../services/products.js';
+import { parsFilterParams } from '../utils/parsFilterParams.js';
 
 export const getProductController = async (req, res) => {
-  const products = await getProducts();
+  const filter = parsFilterParams(req.query);
+
+  const products = await getProducts(filter);
 
   res.json({
     status: 200,
