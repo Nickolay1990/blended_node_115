@@ -1,0 +1,66 @@
+tags:
+  - Products
+summary: Update product
+operationId: productUpdate
+description: Update a product with payload
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '65ca67e7ae7f10c88b598384'
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        additionalProperties: false
+        properties:
+          name:
+            description: "Product's name"
+            type: string
+            example: hoover
+          category:
+            description: "Product's category"
+            type: string
+            enum: ['books', 'electronics', 'clothing', 'other']
+          price:
+            description: "Product's price"
+            type: number
+            example: 500
+          description:
+            description: 'Products description'
+            type: string
+            example: 'Products description'
+responses:
+  '200':
+    description: Updates a product
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully updated a product!
+            data:
+              $ref: '../../../components/schemas/product.yaml'
+  '400':
+    $ref: '../../../components/responses/400.yaml'
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'

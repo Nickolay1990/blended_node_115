@@ -23,6 +23,8 @@ paths:
   /products/{id}:
     get:
       $ref: ../swagger/paths/products/{id}/get.yaml
+    patch:
+      $ref: ../swagger/paths/products/{id}/patch.yaml
 
 components:
   securitySchemes:
