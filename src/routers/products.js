@@ -1,4 +1,5 @@
 import { Router } from 'express';
+
 import {
   getProductController,
   getProductIdController,
@@ -6,13 +7,25 @@ import {
   updateProductController,
   deleteProductController,
 } from '../controllers/products.js';
+import { validateBody } from '../middlewares/validateBody.js';
+import { createProductSchema } from '../validation/product.js';
+import { isValidId } from '../middlewares/isValidId.js';
 
-const router = Router();
+const productRouter = Router();
 
-router.get('/products', getProductController);
-router.get('/products/:productId', getProductIdController);
-router.post('/products', createProductController);
-router.patch('/products/:productId', updateProductController);
-router.delete('/products/:productId', deleteProductController);
+productRouter.get('/', getProductController);
+productRouter.get('/:productId', isValidId, getProductIdController);
+productRouter.post(
+  '/',
+  validateBody(createProductSchema),
+  createProductController,
+);
+productRouter.patch(
+  '/:productId',
+  isValidId,
+  validateBody(createProductSchema),
+  updateProductController,
+);
+productRouter.delete('/:productId', isValidId, deleteProductController);
 
-export default router;
+export default productRouter;
