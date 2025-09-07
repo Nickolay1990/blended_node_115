@@ -1,0 +1,61 @@
+tags:
+  - Products
+summary: Create product
+operationId: productCreate
+description: Create a product with payload
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    application/json:
+      schema:
+        type: object
+        additionalProperties: false
+        required:
+          - name
+          - category
+          - price
+        properties:
+          name:
+            description: "Product's name"
+            type: string
+            example: hoover
+          category:
+            description: "Product's category"
+            type: string
+            enum: ['books', 'electronics', 'clothing', 'other']
+          price:
+            description: "Product's price"
+            type: number
+            example: 500
+          description:
+            description: 'Products description'
+            type: string
+            example: 'Products description'
+responses:
+  '201':
+    description: Creates a product
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a product!
+            data:
+              $ref: '../../components/schemas/product.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
+  '401':
+    $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'
