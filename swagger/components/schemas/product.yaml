@@ -26,6 +26,10 @@ properties:
     description: 'User id'
     type: string
     example: 65e4decdd286b30065d54af9
+  description:
+    description: 'Products description'
+    type: string
+    example: 'Products description'
   createdAt:
     description: 'time of creation of the product'
     type: string

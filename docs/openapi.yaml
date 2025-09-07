@@ -18,6 +18,8 @@ paths:
   /products:
     get:
       $ref: ../swagger/paths/products/get.yaml
+    post:
+      $ref: ../swagger/paths/products/post.yaml
   /products/{id}:
     get:
       $ref: ../swagger/paths/products/{id}/get.yaml
